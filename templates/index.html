@@ -9,23 +9,58 @@
           crossorigin="anonymous">
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">首页</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse"
+             id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left" method="get"
+                  action="/search/">
+                <div class="form-group">
+                    <!--<label for="keyword">关键字</label>-->
+                    <input type="text" class="form-control" id="keyword"
+                           name="keyword"
+                           placeholder="{{keyword or '关键字'}}">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+{% if results %}
 <table class="table table-hover">
     <thead>
     <tr>
-        <th>ID</th>
         <th>标题</th>
-        <th>地址</th>
+        <th>简介</th>
     </tr>
     </thead>
     <tbody>
-    {% for row in rows %}
+    {% for result in results %}
+    {% for row in result["details"]["data"] %}
     <tr>
-        <th scope="row">{{ row.id }}</th>
-        <td>{{ row.title }}</td>
-        <td>{{ row.url }}</td>
+        <th scope="row"><a href='{{row["link"]}}' target="_blank">{{
+            row['title'] | safe }}</a></th>
+        <td>{{ row['des'] }}</td>
     </tr>
+    {% endfor %}
     {% endfor %}
     </tbody>
 </table>
+{% endif %}
 </body>
 </html>
