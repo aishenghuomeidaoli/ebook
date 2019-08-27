@@ -33,6 +33,7 @@
                 <div class="form-group">
                     <!--<label for="keyword">关键字</label>-->
                     <input type="text" class="form-control" id="keyword"
+                           value="{{keyword}}"
                            name="keyword"
                            placeholder="{{keyword or '关键字'}}">
                 </div>
@@ -51,13 +52,11 @@
     </thead>
     <tbody>
     {% for result in results %}
-    {% for row in result["details"]["data"] %}
     <tr>
-        <th scope="row"><a href='{{row["link"]}}' target="_blank">{{
-            row['title'] | safe }}</a></th>
-        <td>{{ row['des'] }}</td>
+        <th scope="row"><a href='{{result["url"]}}' target="_blank">{{
+            result['title'] | safe }}</a></th>
+        <td>{{ result['description'] }}</td>
     </tr>
-    {% endfor %}
     {% endfor %}
     </tbody>
 </table>

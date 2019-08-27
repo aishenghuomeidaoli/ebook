@@ -4,6 +4,7 @@ import sqlite3
 from flask import g
 from flask.cli import with_appcontext
 
+
 def get_db():
     """使用flask g变量存储数据库连接
 
@@ -60,3 +61,18 @@ def init_db_command():
     """Clear the existing data and create new tables."""
     init_db()
     click.echo('Initialized the database.')
+
+
+def insert_or_update_book(title, url, description='', size=0, fmt=''):
+    db = get_db()
+    book = db.execute('SELECT * FROM books WHERE title = ?', (title,)) \
+        .fetchone()
+    if book:
+        db.execute(
+            "UPDATE books SET url = ?, description = ?, size = ?, format = ? "
+            "WHERE title = ?", (url, description, size, fmt, title))
+    else:
+        db.execute(
+            "INSERT INTO books (title, url, size, format, description) "
+            "VALUES (?, ?, ?, ?, ?)", (title, url, size, fmt, description))
+    db.commit()
