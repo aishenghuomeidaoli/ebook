@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--如果有提示消息，则显示-->
+{% if msg %}
+    {{ msg }}
+{% endif %}
+<form method="post" action="/">
+    <span>标题</span>
+    <input type="text" name="title" required>
+    <br>
+    <span>地址</span>
+    <input type="text" name="url" required>
+    <br>
+    <span>大小</span>
+    <input type="number" name="size">
+    <br>
+    <span>格式</span>
+    <input type="text" name="format">
+    <br>
+    <span>描述</span>
+    <input type="text" name="description">
+    <br>
+    <input type="submit" value="创建">
+</form>
+</body>
+</html>

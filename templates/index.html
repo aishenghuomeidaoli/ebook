@@ -5,42 +5,21 @@
     <title>Title</title>
 </head>
 <body>
-<!--如果有提示消息，则显示-->
-{% if msg %}
-    {{ msg }}
-{% endif %}
-
 <form method="get" action="/">
     <input type="text" name="keyword" value="{{keyword}}">
     <input type="submit" value="搜索">
 </form>
 
-<form method="post" action="/">
-    <span>标题</span>
-    <input type="text" name="title" required>
-    <br>
-    <span>地址</span>
-    <input type="text" name="url" required>
-    <br>
-    <span>大小</span>
-    <input type="number" name="size">
-    <br>
-    <span>格式</span>
-    <input type="text" name="format">
-    <br>
-    <span>描述</span>
-    <input type="text" name="description">
-    <br>
-    <input type="submit" value="创建">
-</form>
+<a href="/book/"><input type="button" value="创建"></a>
 
 <!--遍历渲染 book-->
 {% for book in results %}
-    <div>
-        <!--构造书籍内容-->
-        <p><a href='{{book[2]}}'>{{book[1]}}</a>/大小：{{book[3]}}/格式：{{book[4]}}</p>
-        <p>{{book[5]}}</p>
-    </div>
+<div>
+    <!--构造书籍内容-->
+    <p><a href='{{book[2]}}' target="_blank">{{book[1]}}</a>/大小：{{book[3]}}/格式：{{book[4]}}
+    </p>
+    <p>{{book[5]}}</p>
+</div>
 {% endfor %}
 </body>
 </html>
